@@ -1,35 +1,3 @@
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Datas Avançada</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
-        input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-        select {
-             -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1em;
-            padding-right: 2.5rem;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-
     <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
         <!-- Cabeçalho -->
         <div class="text-center">
@@ -251,6 +219,4 @@
             }
         });
     </script>
-</body>
-</html>
 
