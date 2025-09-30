@@ -2,7 +2,7 @@
         <!-- Cabeçalho -->
         <div class="text-center">
             <h1 class="text-3xl font-bold text-gray-800">Calculadora de Prazos</h1>
-            <p class="text-gray-500 mt-2">Descubra a data final somando ou subtraindo dias de uma data inicial.</p>
+            <p class="text-gray-500 mt-2">Descubra a data final somando ou subtraindo dias úteis de uma data inicial.</p>
         </div>
 
         <!-- Formulário Principal -->
@@ -15,21 +15,12 @@
                         <button id="todayBtn" class="p-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition" title="Usar data de hoje">Hoje</button>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label for="daysToProcess" class="block text-sm font-medium text-gray-700 mb-1">Quantidade</label>
-                        <input type="number" id="daysToProcess" placeholder="Ex: 15" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
-                    </div>
-                    <div>
-                        <label for="dayType" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Dia</label>
-                        <select id="dayType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition h-[50px]">
-                            <option value="business">Dias Úteis</option>
-                            <option value="calendar">Dias Corridos</option>
-                        </select>
-                    </div>
+                <div>
+                    <label for="daysToProcess" class="block text-sm font-medium text-gray-700 mb-1">Dias Úteis a Somar/Subtrair</label>
+                    <input type="number" id="daysToProcess" placeholder="Ex: 15 ou -10" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                 </div>
             </div>
-            <div id="includeStartDateWrapper" class="flex items-center justify-center pt-2">
+            <div class="flex items-center justify-center pt-2">
                 <input type="checkbox" id="includeStartDate" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                 <label for="includeStartDate" class="ml-2 block text-sm text-gray-900">Incluir data de início no cálculo</label>
             </div>
@@ -70,8 +61,6 @@
         const startDateInput = document.getElementById('startDate');
         const daysToProcessInput = document.getElementById('daysToProcess');
         const includeStartDateInput = document.getElementById('includeStartDate');
-        const dayTypeSelect = document.getElementById('dayType');
-        const includeStartDateWrapper = document.getElementById('includeStartDateWrapper');
 
         // --- FERIADOS NACIONAIS (YYYY-MM-DD para móveis, MM-DD para fixos) ---
         const nationalHolidays = [
@@ -112,48 +101,25 @@
         function calculate() {
             const startDateValue = startDateInput.value;
             const daysToProcess = parseInt(daysToProcessInput.value, 10);
-            const dayType = dayTypeSelect.value;
+            const includeStartDate = includeStartDateInput.checked;
 
             if (!startDateValue || isNaN(daysToProcess)) {
-                showError("Preencha a data de início e a quantidade de dias.");
+                showError("Preencha a data de início e o número de dias.");
                 return;
             }
-             if (daysToProcess === 0) {
-                showError("A quantidade de dias deve ser diferente de zero.");
+            if (daysToProcess === 0) {
+                showError("O número de dias deve ser diferente de zero.");
                 return;
             }
 
             hideError();
             
             const startDate = new Date(startDateValue + 'T00:00:00');
-            let finalDate = new Date(startDate);
-
-            if (dayType === 'business') {
-                calculateBusinessDays(startDate, daysToProcess);
-            } else {
-                calculateCalendarDays(startDate, daysToProcess);
-            }
-        }
-
-        function calculateCalendarDays(startDate, daysToProcess) {
-            let finalDate = new Date(startDate);
-            finalDate.setDate(finalDate.getDate() + daysToProcess);
-            
-            resultDate.textContent = formatDate(finalDate);
-            resultSummary.innerHTML = `
-                <strong>Período:</strong> ${formatDate(startDate)} a ${formatDate(finalDate)}<br>
-                <strong>Resumo:</strong> ${Math.abs(daysToProcess)} dias corridos foram ${daysToProcess > 0 ? 'adicionados' : 'subtraídos'}.
-            `;
-            resultDiv.classList.remove('hidden');
-        }
-
-        function calculateBusinessDays(startDate, daysToProcess) {
-            const includeStartDate = includeStartDateInput.checked;
             let currentDate = new Date(startDate);
             let businessDaysCount = 0;
             let holidaysCount = 0;
             let weekendsCount = 0;
-            
+
             const direction = daysToProcess > 0 ? 1 : -1;
             const targetBusinessDays = Math.abs(daysToProcess);
 
@@ -168,10 +134,12 @@
                 }
             }
             
+            // Recalcula contadores para o sumário detalhado
             let tempDate = new Date(startDate);
             let totalDays = 0;
             let finalDate = new Date(currentDate);
 
+            // Garante que o intervalo do sumário está correto
             const [startSummary, endSummary] = startDate < finalDate ? [tempDate, finalDate] : [finalDate, tempDate];
 
             while(startSummary <= endSummary) {
@@ -199,8 +167,6 @@
             startDateInput.value = '';
             daysToProcessInput.value = '';
             includeStartDateInput.checked = false;
-            dayTypeSelect.value = 'business';
-            includeStartDateWrapper.classList.remove('hidden');
             resultDiv.classList.add('hidden');
             hideError();
         }
@@ -211,13 +177,4 @@
         todayBtn.addEventListener('click', () => {
             startDateInput.value = new Date().toISOString().split('T')[0];
         });
-        dayTypeSelect.addEventListener('change', (e) => {
-            if (e.target.value === 'calendar') {
-                includeStartDateWrapper.classList.add('hidden');
-            } else {
-                includeStartDateWrapper.classList.remove('hidden');
-            }
-        });
     </script>
-</html>
-
