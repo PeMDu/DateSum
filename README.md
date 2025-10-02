@@ -1,3 +1,5 @@
+<body class="flex items-center justify-center min-h-screen p-4">
+
     <div class="w-full max-w-4xl bg-gray-100 rounded-2xl shadow-2xl shadow-lime-500/10 overflow-hidden border-t-4 border-lime-400">
         <div class="md:grid md:grid-cols-2">
             <!-- Coluna da Esquerda: Formulário -->
@@ -258,3 +260,4 @@
             includeStartDateWrapper.style.display = dayTypeSelect.value === 'calendar' ? 'none' : 'flex';
         });
     </script>
+</body>
