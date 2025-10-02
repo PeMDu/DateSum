@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Prazos | Estilo Foster II</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif;
-            background-color: #001C30; /* Foster Dark Blue */
-            background-image: radial-gradient(circle at 1px 1px, rgba(162, 255, 134, 0.1) 1px, transparent 0);
-            background-size: 2.5rem 2.5rem;
-        }
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
-        }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-        select {
-             -webkit-appearance: none; -moz-appearance: none; appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em;
-        }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-</head>
-<body class="flex items-center justify-center min-h-screen p-4">
-
     <div class="w-full max-w-4xl bg-gray-100 rounded-2xl shadow-2xl shadow-lime-500/10 overflow-hidden border-t-4 border-lime-400">
         <div class="md:grid md:grid-cols-2">
             <!-- Coluna da Esquerda: Formulário -->
@@ -294,6 +258,3 @@
             includeStartDateWrapper.style.display = dayTypeSelect.value === 'calendar' ? 'none' : 'flex';
         });
     </script>
-</body>
-</html>
-
